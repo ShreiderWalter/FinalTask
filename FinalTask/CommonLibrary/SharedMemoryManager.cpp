@@ -9,13 +9,18 @@ SharedMemoryManager::SharedMemoryManager()
 
 SharedMemoryManager::SharedMemoryManager(const std::string & name)
 {
-	SECURITY_DESCRIPTOR sd;
-	SECURITY_ATTRIBUTES sa;
-	InitializeSecurityAttributesForEverybodyAccess(&sa, &sd);
+	SECURITY_ATTRIBUTES security;
+	ZeroMemory(&security, sizeof(security));
+	security.nLength = sizeof(security);
+	ConvertStringSecurityDescriptorToSecurityDescriptor(
+         "D:P(A;OICI;GA;;;SY)(A;OICI;GA;;;BA)(A;OICI;GR;;;IU)",
+         SDDL_REVISION_1,
+         &security.lpSecurityDescriptor,
+         nullptr);
 
 
 	m_sharedMemory = CreateFileMapping(INVALID_HANDLE_VALUE,
-						&sa,
+						&security,
 						PAGE_READWRITE,
 						0,
 						BUFFER_SIZE,

@@ -12,8 +12,10 @@
 #include <boost\asio.hpp>
 #include <boost\exception\all.hpp>
 #include <algorithm>
+#include <Wtsapi32.h>
 #pragma comment(lib, "gdiplus.lib")
 #pragma comment(lib, "Shlwapi.lib")
+#pragma comment(lib, "Wtsapi32.lib")
 
 #include "SharedMemoryManager.h"
 
@@ -21,22 +23,22 @@ class Server
 {
 private:
 	class ServerSession;
-	//SharedMemoryManager * manager;
-	std::vector<ServerSession *> sessions;
-	boost::asio::io_service & m_io_service;
-	boost::asio::ip::tcp::acceptor m_acceptor;
 
 	void bind();
 	void accept(ServerSession * , const boost::system::error_code &);
 	void setImage();
+	boost::asio::io_service & m_io_service;
+	boost::asio::ip::tcp::acceptor m_acceptor;
 	int m_size;
 	unsigned char * m_buffer;
 	SharedMemoryManager * m_manager;
+
 
 public:
 	Server(boost::asio::io_service & io_service, int port);
 	SharedMemoryManager * getMemoryManager() const;
 	static std::mutex m_mutex;
+	void stop();
 
 
 };

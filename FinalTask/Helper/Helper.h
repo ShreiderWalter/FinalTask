@@ -8,7 +8,9 @@
 #include <gdiplus.h>
 #include <cstdint>
 #include <Gdipluspixelformats.h>
+#include <Wtsapi32.h>
 #pragma comment(lib,"gdiplus.lib")
+#pragma comment(lib, "Wtsapi32.lib")
 
 #include "SharedMemoryManager.h"
 
@@ -18,7 +20,7 @@
 class Helper
 {
 private:
-	SharedMemoryManager * manager;
+	SharedMemoryManager * m_manager;
 	void threadProgress();
 public:
 	Helper();

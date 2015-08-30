@@ -249,8 +249,12 @@ void Server::accept(ServerSession * session, const boost::system::error_code & e
 	{
 		delete session;
 	}
-
 	bind();
+}
+
+void Server::stop()
+{
+	m_acceptor.close();
 }
 
 std::mutex Server::m_mutex;
