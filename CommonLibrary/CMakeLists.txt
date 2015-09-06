@@ -1,13 +1,11 @@
 set (HEADERS 
+"ScreenUtils.h"
 "SharedMemoryManager.h"
-"stdafx.h"
-"targetver.h"
 )
 
 set (SOURCES
-
+"ScreenUtils.cpp"
 "SharedMemoryManager.cpp"
-"stdafx.cpp"
 )
 
 source_group("Header files" FILES ${HEADERS})

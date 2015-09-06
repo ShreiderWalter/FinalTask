@@ -12,11 +12,8 @@
 #include <boost\asio.hpp>
 #include <boost\exception\all.hpp>
 #include <algorithm>
-#include <Wtsapi32.h>
-#pragma comment(lib, "gdiplus.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "Wtsapi32.lib")
 
+#include "ScreenUtils.h"
 #include "SharedMemoryManager.h"
 
 class Server 

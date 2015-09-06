@@ -7,7 +7,6 @@
 #include <memory>
 #include <tchar.h>
 #include <Sddl.h>
-#pragma comment(lib, "Advapi32.lib");
 
 #define PIPE_NAME TEXT("\\\\.\\pipe\\Pipe")
 #define BUFFER_SIZE 4403200

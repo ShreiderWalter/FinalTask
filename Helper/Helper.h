@@ -8,10 +8,9 @@
 #include <gdiplus.h>
 #include <cstdint>
 #include <Gdipluspixelformats.h>
-#include <Wtsapi32.h>
 #pragma comment(lib,"gdiplus.lib")
-#pragma comment(lib, "Wtsapi32.lib")
 
+#include "ScreenUtils.h"
 #include "SharedMemoryManager.h"
 
 #define BUFFER_SIZE 1024
@@ -20,7 +19,7 @@
 class Helper
 {
 private:
-	SharedMemoryManager * m_manager;
+	SharedMemoryManager * manager;
 	void threadProgress();
 public:
 	Helper();

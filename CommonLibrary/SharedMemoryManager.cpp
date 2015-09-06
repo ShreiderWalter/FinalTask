@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "SharedMemoryManager.h"
 
 std::shared_ptr<SharedMemoryManager> SharedMemoryManager::self;
@@ -9,24 +8,19 @@ SharedMemoryManager::SharedMemoryManager()
 
 SharedMemoryManager::SharedMemoryManager(const std::string & name)
 {
-	SECURITY_ATTRIBUTES security;
-	ZeroMemory(&security, sizeof(security));
-	security.nLength = sizeof(security);
-	ConvertStringSecurityDescriptorToSecurityDescriptor(
-         "D:P(A;OICI;GA;;;SY)(A;OICI;GA;;;BA)(A;OICI;GR;;;IU)",
-         SDDL_REVISION_1,
-         &security.lpSecurityDescriptor,
-         nullptr);
+	SECURITY_DESCRIPTOR sd;
+	SECURITY_ATTRIBUTES sa;
+	InitializeSecurityAttributesForEverybodyAccess(&sa, &sd);
 
 
 	m_sharedMemory = CreateFileMapping(INVALID_HANDLE_VALUE,
-						&security,
+						&sa,
 						PAGE_READWRITE,
 						0,
 						BUFFER_SIZE,
 						name.c_str());
 
-	m_eventLock = CreateEvent(nullptr, false, false, EVENT_NAME);
+	//m_eventLock = CreateEvent(nullptr, false, false, EVENT_NAME);
 
 	m_eventWrite = CreateEvent(nullptr, false, false, EVENT_WRITE_NAME);
 
@@ -57,13 +51,10 @@ std::shared_ptr<SharedMemoryManager> SharedMemoryManager::connect(const std::str
 {
 	self = std::shared_ptr<SharedMemoryManager>(new SharedMemoryManager);
 	self->m_sharedMemory = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, name.c_str());
-	self->m_eventLock = OpenEvent(EVENT_ALL_ACCESS, false, EVENT_NAME);
 	self->m_eventWrite = OpenEvent(EVENT_ALL_ACCESS, false, EVENT_WRITE_NAME);
 	self->m_buffer = (LPTSTR) MapViewOfFile(self->m_sharedMemory, FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, BUFFER_SIZE);
 	std::cout << GetLastError();
 	self->m_mutex = OpenMutex(FILE_MAP_READ | FILE_MAP_WRITE, false, MUTEX_NAME);
-
-	SetEvent(self->m_eventLock);
 
 	return self;
 }
@@ -85,7 +76,6 @@ void SharedMemoryManager::write(const char * tmp)
 	m_buffer = (LPTSTR) MapViewOfFile(m_sharedMemory, FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, BUFFER_SIZE);
 	CopyMemory((PVOID)m_buffer, tmp,  (_tcslen(tmp)) * sizeof(TCHAR));
 	ReleaseMutex(m_mutex);
-	SetEvent(m_eventLock);
 }
 
 void SharedMemoryManager::write(unsigned char * buffer, DWORD bufferSize)
@@ -94,12 +84,10 @@ void SharedMemoryManager::write(unsigned char * buffer, DWORD bufferSize)
 	CopyMemory((PVOID)m_buffer, buffer, bufferSize);
 	FlushViewOfFile(m_buffer, BUFFER_SIZE);
 	ReleaseMutex(m_mutex);
-	SetEvent(m_eventLock);
 }
 
 char * SharedMemoryManager::read()
 {
-	WaitForSingleObject(m_eventLock, INFINITE);
 	WaitForSingleObject(m_mutex, INFINITE);
 	char * tmp = (char *) m_buffer;
 	ReleaseMutex(m_mutex);

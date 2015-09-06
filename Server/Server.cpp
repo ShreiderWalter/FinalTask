@@ -1,5 +1,4 @@
 #include "Server.h"
-#include <gdiplus.h>
 
 using boost::asio::ip::tcp;
 
@@ -33,111 +32,6 @@ tcp::socket & Server::ServerSession::socket()
 	return m_socket;
 }
 
-HBITMAP Bytes2Bitmap(char arrData[], int iLen)
-{
-	PBITMAPFILEHEADER bmfHeader;
-	PBITMAPINFO pbi;
-	HDC hDC;
-	HBITMAP hBmpRet;
-	int iRet;
-	char *lpbitmap;
-	int iSizeOfBmInfo;
-	const int iSizeOfBmfHeader = sizeof(BITMAPFILEHEADER);
- 
-	bmfHeader = (PBITMAPFILEHEADER) arrData;
-	arrData += iSizeOfBmfHeader;
- 
-	iSizeOfBmInfo = bmfHeader->bfOffBits - iSizeOfBmfHeader;
-	pbi = (PBITMAPINFO)arrData;
-	arrData += iSizeOfBmInfo;
- 
-	hDC = GetDC(nullptr);
-	hBmpRet = CreateCompatibleBitmap(hDC,
-	pbi->bmiHeader.biWidth, pbi->bmiHeader.biHeight);
- 
-	iRet = SetDIBits(hDC, hBmpRet, 0,
-		pbi->bmiHeader.biHeight,
-		arrData,
-		pbi, DIB_RGB_COLORS);
- 
-	::ReleaseDC(nullptr, hDC);
- 
-	return hBmpRet;
-}
-
-int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
-{
-	UINT  num = 0;
-	UINT  size = 0;
- 
-	Gdiplus::ImageCodecInfo* pImageCodecInfo = nullptr;
- 
-	Gdiplus::GetImageEncodersSize(&num, &size);
-	if(size == 0)
-		return -1;
- 
-	pImageCodecInfo = (Gdiplus::ImageCodecInfo *)(malloc(size));
-	if(pImageCodecInfo == nullptr)
-		return -1;
- 
-	GetImageEncoders(num, size, pImageCodecInfo);    
- 
-	for(UINT j = 0; j < num; ++j)
-	{
-		if( wcscmp(pImageCodecInfo[j].MimeType, format) == 0 )
-		{
-			*pClsid = pImageCodecInfo[j].Clsid;
-			free(pImageCodecInfo);
-			return j;
-		}    
-	}
- 
-	free(pImageCodecInfo);
-	return -1; 
-}
-
-BYTE * hbitmapToJPEG(HBITMAP hBmpSrc, int & size_)
-{
-	ULONG_PTR gdiplusToken;
-    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
-    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
-	ULONG uQuality = 33;
-	Gdiplus::Bitmap * pScreenShot = new Gdiplus::Bitmap(hBmpSrc, (HPALETTE)nullptr);
-    Gdiplus::EncoderParameters encoderParams;
-    encoderParams.Count = 1;
-    encoderParams.Parameter[0].NumberOfValues = 1;
-    encoderParams.Parameter[0].Guid  = Gdiplus::EncoderQuality;
-    encoderParams.Parameter[0].Type  = Gdiplus::EncoderParameterValueTypeLong;
-    encoderParams.Parameter[0].Value = &uQuality;
-	CLSID imageCLSID;
-    GetEncoderClsid(L"image/jpeg", &imageCLSID);
-
-    IStream *pStream = nullptr;
-    LARGE_INTEGER liZero = {};
-    ULARGE_INTEGER pos = {};
-    STATSTG stg = {};
-    ULONG bytesRead = 0;
-    HRESULT hrRet = S_OK;
-
-    BYTE * buffer = nullptr;
-    DWORD dwBufferSize = 0;
-    hrRet = CreateStreamOnHGlobal(nullptr, TRUE, &pStream);
-    hrRet = pScreenShot->Save(pStream, &imageCLSID, &encoderParams) == 0 ? S_OK : E_FAIL;
-    hrRet = pStream->Seek(liZero, STREAM_SEEK_SET, &pos);
-    hrRet = pStream->Stat(&stg, STATFLAG_NONAME);
-
-    buffer = new BYTE[stg.cbSize.LowPart];
-    hrRet = (buffer == nullptr) ? E_OUTOFMEMORY : S_OK;
-    dwBufferSize = stg.cbSize.LowPart;
-    hrRet = pStream->Read(buffer, stg.cbSize.LowPart, &bytesRead);
-	if(pStream)
-		pStream->Release();
-
-	size_ = dwBufferSize;
-
-	return buffer;
-}
-
 void Server::ServerSession::threadProgress(SharedMemoryManager * manager)
 {
 	while(true)
@@ -149,8 +43,8 @@ void Server::ServerSession::threadProgress(SharedMemoryManager * manager)
 		unsigned char * buffer = (unsigned char *) manager->read();
 		Server::m_mutex.unlock();
 
-		HBITMAP image = Bytes2Bitmap((char *) buffer, size);
-		buffer = hbitmapToJPEG(image, size);
+		HBITMAP image = ScreenUtils::Bytes2Bitmap((char *) buffer, size);
+		buffer = ScreenUtils::hbitmapToJPEG(image, size);
 
 		try
 		{
@@ -166,7 +60,6 @@ void Server::ServerSession::threadProgress(SharedMemoryManager * manager)
 		}
 		catch(const std::exception & e)
 		{
-			delete this;
 			return;
 		}
 	}
@@ -258,5 +151,3 @@ void Server::stop()
 }
 
 std::mutex Server::m_mutex;
-
-

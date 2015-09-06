@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="559f29c1-b1e4-4913-a062-186f0f5eb11a" name="Classes" linkedPackageId="53f11f96-7335-49de-b5d7-d954e066b6a1" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2622090b-f195-4771-815b-3e21b033346a" name="Server" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="794849be-2d4b-410b-999e-34642a6cc550" />
+        <ownedAttributesInternal>
+          <property Id="a4093f5c-feb7-49c6-aa1b-d983462fd794" name="m_io_service" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a47caaab-643d-4cb1-b2be-c0d034544037" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f915a889-b990-4f6f-a5d7-db08e2afeca7" LastKnownName="boost::asio::io_service" />
+            </type_NamedElement>
+          </property>
+          <property Id="5d99062b-20ed-41ec-8f41-1f8e41c41d96" name="m_acceptor" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="bb0b1252-d9fb-4038-a9b5-277bbfa5c8f8" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="be22a222-6324-4ff4-9c93-b213966f0ac1" LastKnownName="boost::asio::ip::tcp::acceptor" />
+            </type_NamedElement>
+          </property>
+          <property Id="50b91d36-a24c-4667-8a76-1ba34c5ede91" name="m_buffer" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="106bb0f7-de02-4c01-9741-a9acb4b460db" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="39f025af-ee81-43de-ba59-35ca642bf6e2" LastKnownName="unsigned char *" />
+            </type_NamedElement>
+          </property>
+          <property Id="ca27c912-9fa9-4ee9-9cb0-1a0a8507e175" name="m_manager" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="46daa8b5-aa73-445f-9eaa-33788b4007b0" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="5d88abba-fa4a-4864-af53-83b7fb4fe321" LastKnownName="SharedMemoryManager *" />
+            </type_NamedElement>
+          </property>
+          <property Id="914b249f-6aaa-4e7e-a444-78f897b2b2e9" name="m_mutex" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="db016be0-c2bd-4cda-8e0b-fc7e016fef29" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f8065dcb-2808-4fe0-964a-f7c1ac186e40" LastKnownName="std::mutex" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="4c5db78a-1c0d-48e9-a557-6e1aa7deea37" name="accept" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6b6b0b17-7636-43a6-85ee-09fcfca003a4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="92f5a659-7e9f-4cfc-bfd5-b2cf32222c37" name="ServerSession *" direction="In" isUnique="false">
+                  <elementDefinition Id="dc19b441-9191-4fe1-aa40-bdaec345cf29" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c398e464-b3e9-45be-ba6b-1c172ab7e875" name="const boost::system::error &amp;" direction="In" isUnique="false">
+                  <elementDefinition Id="61b888cf-b23a-4356-a11c-90c7983c0339" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3b14294f-cce9-4c61-9aa9-87a91d7461c3" direction="Return" isUnique="false">
+                  <elementDefinition Id="9b8eb3f7-bec3-476a-9cb4-ef7913cf9438" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="bc1b92b6-3a9d-41ee-aef9-fc28e6b86aa8" name="bind" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="766276c4-0246-4a69-bc01-141670d756f7" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1e28dee3-c357-4899-8c69-94707955c1f9" direction="Return" isUnique="false">
+                  <elementDefinition Id="325ed051-8ebd-4459-9add-8001e5ae9823" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="86913a96-e6fc-4057-9822-833d40e3d95a" name="getMemoryManager" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3f8842d1-2d56-423e-a503-8735b5ea7703" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1580d47a-fc00-48b2-b09e-e4b1b82da5af" direction="Return" isUnique="false">
+                  <elementDefinition Id="a9431327-6770-4c80-8c32-22b87b909520" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5d88abba-fa4a-4864-af53-83b7fb4fe321" LastKnownName="SharedMemoryManager *" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c4a012f4-ae75-4fe4-aab0-97a6e8dd74a7" name="stop" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="fc8da570-5cfa-40eb-a6a5-2038552550b2" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e0332c29-0c6e-4b6e-8e5a-2a9b9bc129d0" direction="Return" isUnique="false">
+                  <elementDefinition Id="e3e4f920-0e44-4dcc-9914-d906f5fd6172" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="20935c76-48fe-40ea-b6e0-c542855b6bae" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="3c00e43b-ed9e-47ce-8759-1f527d30f537" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="946f5d56-c907-4b0e-8781-d1641c34579f" name="Client" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3d590962-c39d-4f63-afb8-e02e164e1ff8" />
+        <ownedAttributesInternal>
+          <property Id="06fb7679-9853-4277-92e6-9709420d31e8" name="m_socket" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="599330bd-83f5-494b-ac23-6218e799e49a" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="2481d3ff-e429-414b-8f72-11b59a7ded2e" LastKnownName="boost::asio::ip::tcp::socket" />
+            </type_NamedElement>
+          </property>
+          <property Id="58c74bf8-089d-4d1a-864a-df867a17e114" name="m_runFlag" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="53865f4d-7151-4a69-9f01-2345c1e446ec" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="3633ff6c-6338-4cc9-bfc5-053153e4bf02" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="fedc4e35-0c0f-4c23-91fb-13f819a13775" name="readBytes" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5f194eab-d390-43e4-869b-2b35e7b68550" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="142ed6c2-7fd1-4869-abfd-8d02a8900306" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="1bd9bbfd-fde4-4ae7-a6c5-34f06b00526f" name="result" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d3f55b35-2caa-4418-bafe-2afc1a636910" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c92c9ef0-6e58-47f3-8f7f-e587f3dc16d9" LastKnownName="BYTE *" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="b4c7c780-06de-4818-aa6d-eff1f76fa0dc" name="ifRead" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7bf20c0d-b19d-478f-8e20-3cea5fe674fe" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7ce2aa0d-3eae-4c32-9f08-03b985a26f44" name="const boost::system::error_code &amp; error" direction="In" isUnique="false">
+                  <elementDefinition Id="193999c0-722a-4927-9a2d-fa32bc4d77be" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b5d0255c-ea13-4ec1-bf1f-c5ef3bfa72dc" name="size_t bytes" direction="In" isUnique="false">
+                  <elementDefinition Id="4f89040d-7569-4157-8c01-5bd7973289ef" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="95daf509-adfb-415a-9c23-5bbb892ea137" direction="Return" isUnique="false">
+                  <elementDefinition Id="e50668ce-221f-492a-a8d4-117b83f137fe" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c2d17e4f-dcb0-4821-8894-a4415dc43720" LastKnownName="size_t" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="422aa4c7-ca40-405d-811b-2f92ac996bbc" name="ifReadImage" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="bc641985-c5e5-41c3-ab87-f3be886cd8a9" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7b9c77d0-9398-4942-9aff-a91915aba3f9" direction="Return" isUnique="false">
+                  <elementDefinition Id="635526ec-aa04-43bd-85c3-9265e47fc557" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c2d17e4f-dcb0-4821-8894-a4415dc43720" LastKnownName="size_t" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="edfac0a1-431e-4b27-9ebb-5577e3482f36" name="const boost::system::error_code &amp; error" direction="In" isUnique="false">
+                  <elementDefinition Id="ac70d4ec-0133-4630-9fc1-2354bc6e99be" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d48447ff-bfa1-4031-b63d-55a20c397d38" name="size_t bytes" direction="In" isUnique="false">
+                  <elementDefinition Id="9fa20e85-661b-465d-8e8b-aa000c01a0dc" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="d8d7083a-798a-4e46-b03a-bcb96991cfa7" name="connect" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ca289582-7d25-465c-ace1-fff6b848b45c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8e36cfd1-196e-4f4b-9754-39fd0c829670" name="boost::asio::ip::tcp::endpoint" direction="In" isUnique="false">
+                  <elementDefinition Id="c630ed65-8926-4039-98ec-9b993eddce36" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="04a90795-35fa-41a0-9f9e-6ca3cc70bacd" direction="Return" isUnique="false">
+                  <elementDefinition Id="b2e48f91-335f-4bb2-b025-24bf9b9ca22f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="2bd49bb8-0d4c-43ab-9291-72a04591d493" name="run" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="59bf3694-541f-4c9a-81b5-2512f50fc946" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="4277572e-7518-4fe9-b651-23fac6a23bef" direction="Return" isUnique="false">
+                  <elementDefinition Id="558afd29-4c9a-4ab0-a9e3-717d7f51f5ca" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="1e2645db-edd7-46e3-aa14-534f5232584a" name="read" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ebce5471-329b-4b9d-8b97-58acfe7d5212" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7037b536-99ee-4c50-a3a7-4b6156803fbd" direction="Return" isUnique="false">
+                  <elementDefinition Id="122aa73c-e513-4490-ba09-3d72c1711ed5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="35d1f465-f0b6-4c2b-b33a-30122b7c0e85" name="readSize" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3757f8b2-88c9-4c7a-b9ce-9b30747fe971" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1e772c36-24b9-40a5-b10a-588f889f0c7e" direction="Return" isUnique="false">
+                  <elementDefinition Id="219ec7a9-e428-4377-acfa-50f8d2d52b3f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="bfc801e9-cb4f-45b7-be69-525259595712" name="write" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="42199c4a-0d8d-4d62-81de-c3089be2883e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="598f4af9-95f6-40d6-a122-5ad5a99b8a0a" name="const std::string &amp;" direction="In" isUnique="false">
+                  <elementDefinition Id="57ea0a63-6192-41d9-a240-b1632ec9a3c0" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="90f47d6d-1d69-4038-aca0-b56e6bec2525" direction="Return" isUnique="false">
+                  <elementDefinition Id="43d63b29-efa2-439d-80da-26657d608837" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="8fd0006d-7bed-42db-a037-eb5a812a2b80" name="loadForm" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="00a22a15-d82f-42c9-9b28-cc63b970e9ef" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="fb878a5d-1276-4603-8d86-662047e8b74c" direction="Return" isUnique="false">
+                  <elementDefinition Id="0916cdfe-bb14-4f0d-8280-c8bb483f041d" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5dd8ce09-4244-4a52-b74e-4024f2559a0f" name="Helper" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bbd08ad7-1eac-4d50-ba6e-49d0914df699" />
+        <ownedAttributesInternal>
+          <property Id="9e762a0f-e950-4a91-baea-c69dc153d17d" name="manager" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="86fb416e-2756-4190-b492-ae9f2ef8a908" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="5d88abba-fa4a-4864-af53-83b7fb4fe321" LastKnownName="SharedMemoryManager *" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="427fb165-3fdb-4285-830d-b351e9e8f065" name="threadProgress" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="403e3ca0-1694-4fef-bdb3-99101d814f36" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="588f3d48-a156-493a-83ed-c128eb366fe4" direction="Return" isUnique="false">
+                  <elementDefinition Id="9e3e8a1d-3031-4f93-b455-fd244ae9b763" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="7ba3c593-46b7-42cd-94ce-57c5de88c4a7" name="run : void" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8bdb593d-24c4-4bf1-9130-5b9d3f77f3f3" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="f915a889-b990-4f6f-a5d7-db08e2afeca7" name="boost::asio::io_service" isAbstract="false" isLeaf="false" cachedFullName="boost::asio::io_service">
+        <elementDefinition Id="037fecd9-6cf1-464c-84c0-4157740ccd3f" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="be22a222-6324-4ff4-9c93-b213966f0ac1" name="boost::asio::ip::tcp::acceptor" isAbstract="false" isLeaf="false" cachedFullName="boost::asio::ip::tcp::acceptor">
+        <elementDefinition Id="c1f34f84-90e7-40f9-a316-5dd2d7ff1e6c" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="39f025af-ee81-43de-ba59-35ca642bf6e2" name="unsigned char *" isAbstract="false" isLeaf="false" cachedFullName="unsigned char *">
+        <elementDefinition Id="89fb0c69-85c4-457b-b281-acef9ffa15bf" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="5d88abba-fa4a-4864-af53-83b7fb4fe321" name="SharedMemoryManager *" isAbstract="false" isLeaf="false" cachedFullName="SharedMemoryManager *">
+        <elementDefinition Id="dccd64ff-ad54-4ca9-86e7-034c5b0b128b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="f8065dcb-2808-4fe0-964a-f7c1ac186e40" name="std::mutex" isAbstract="false" isLeaf="false" cachedFullName="std::mutex">
+        <elementDefinition Id="3c047568-12bd-4ed6-b0cb-a113039b468e" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="2481d3ff-e429-414b-8f72-11b59a7ded2e" name="boost::asio::ip::tcp::socket" isAbstract="false" isLeaf="false" cachedFullName="boost::asio::ip::tcp::socket">
+        <elementDefinition Id="a714a67c-b335-44e8-9269-a52354b3cf8a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="3633ff6c-6338-4cc9-bfc5-053153e4bf02" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="48b15797-a3e8-4ce9-880a-199b53e7716b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="142ed6c2-7fd1-4869-abfd-8d02a8900306" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="fb761381-c615-4ce3-9e22-0bbe1ca061f0" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c92c9ef0-6e58-47f3-8f7f-e587f3dc16d9" name="BYTE *" isAbstract="false" isLeaf="false" cachedFullName="BYTE *">
+        <elementDefinition Id="ea1e8f4f-a5fa-409e-9555-51f107ca1cb3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c2d17e4f-dcb0-4821-8894-a4415dc43720" name="size_t" isAbstract="false" isLeaf="false" cachedFullName="size_t">
+        <elementDefinition Id="e915c38f-7b83-402f-b799-6d67b29b0566" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3d05400a-edec-4821-a4bd-5cac15d9ada5" name="SharedMemoryManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0430e6e9-49a9-4c6d-9ba4-ec368bc2a27b" />
+        <ownedAttributesInternal>
+          <property Id="b0d35321-bac4-4be4-8e72-8914b5ac3977" name="m_sharedMemory" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5dab60ac-3623-41e6-9193-502765215af1" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="086b7e96-1a60-4f07-8539-161eedfdd8f2" LastKnownName="HANDLE" />
+            </type_NamedElement>
+          </property>
+          <property Id="f7ef1362-9084-43fc-a0b8-aa99733e5ad4" name="m_eventWrite" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e7622c1c-00bd-4e38-a7a5-974c977748e6" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="086b7e96-1a60-4f07-8539-161eedfdd8f2" LastKnownName="HANDLE" />
+            </type_NamedElement>
+          </property>
+          <property Id="082385ac-32fc-468d-a811-d6c094ad9c37" name="m_buffer" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6a0cddfd-2f83-4437-8557-45ed6ef4d6e6" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="ed36b80b-8a3f-418e-a7e5-f2526365549d" LastKnownName="LPTSTR" />
+            </type_NamedElement>
+          </property>
+          <property Id="fb1a90f4-2bc5-4952-8eaa-4e90f4cb1f67" name="m_mutex" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b530a791-79b5-449d-8e32-1999e9831905" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="086b7e96-1a60-4f07-8539-161eedfdd8f2" LastKnownName="HANDLE" />
+            </type_NamedElement>
+          </property>
+          <property Id="9978766e-1169-4e98-9b1a-9b5b289a61fa" name="self" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="fc36b041-9a9c-4c3f-8f1c-ede921d3a173" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="71d910a3-94eb-4446-b9e0-4a4a0f3ef3e8" LastKnownName="std::shared_ptr&lt;SharedMemoryManager&gt;" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="26f6d666-203d-40c3-b9d9-447973fe8a7a" name="create" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ff304b12-7b5e-4943-9d7f-d317a4d67b4f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="990fdbab-20d6-4338-99a4-9ab1cdf911be" name="const std::string &amp;" direction="In" isUnique="false">
+                  <elementDefinition Id="90009736-5939-47fe-a776-fb83be2271c2" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0cbe90ce-08ad-45ea-a9a8-c04015d569cf" direction="Return" isUnique="false">
+                  <elementDefinition Id="12182014-5b2d-420c-83a5-a7d0e24c0741" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="71d910a3-94eb-4446-b9e0-4a4a0f3ef3e8" LastKnownName="std::shared_ptr&lt;SharedMemoryManager&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="5bab6e38-449f-4d0e-af37-c5022be230be" name="connect" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f708d853-2381-4317-87fa-a8eb2e87ec66" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5da514dc-cdd4-4b0b-9790-45f36c39b00d" name="const std::string &amp;" direction="In" isUnique="false">
+                  <elementDefinition Id="55da895f-2c48-4b98-88d7-816abe8175b4" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b67b2953-4663-4511-aa8b-ca571d83a397" direction="Return" isUnique="false">
+                  <elementDefinition Id="29834259-f87c-46f3-9743-a5f7f6d36278" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="71d910a3-94eb-4446-b9e0-4a4a0f3ef3e8" LastKnownName="std::shared_ptr&lt;SharedMemoryManager&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="987a9da3-5948-4021-a1e8-95683f749cdf" name="close" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b8b1b13c-e853-4620-84b1-64cd1efb7ed7" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e46fde1e-bf42-44ad-b5bc-2bb19229e843" direction="Return" isUnique="false">
+                  <elementDefinition Id="8574965e-5ad7-4e65-8de8-d67d0a9d8a7e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="ecb40de9-5328-455d-90de-0757d6464114" name="read" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a4e17f83-dace-47d7-b4f6-b959185a601a" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1810538f-6fc4-45c8-a32f-b7af662e05fb" direction="Return" isUnique="false">
+                  <elementDefinition Id="05e02641-4d1c-43dc-9acc-e9e8a9c1f0c5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="ca1a49c2-be1d-4c58-85d7-920f79b5faf5" LastKnownName="char *" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="711a3b8d-ae99-4bd9-b62b-2725f5141103" name="write" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c2f796e9-8197-47c7-b146-da654cc80589" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0392262d-dceb-42fa-a548-6ba4adac2e7b" name="const char *" direction="In" isUnique="false">
+                  <elementDefinition Id="1129d15d-8c43-4556-96bf-fea61711730e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="4be403d7-0157-4c36-9ee8-d5336995b04e" direction="Return" isUnique="false">
+                  <elementDefinition Id="451723e5-536e-4176-a286-baa662ac56a3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="a351dcf2-676b-4a8f-9e19-13c936b4d78d" name="write" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3b5810be-6c54-452e-9ef6-6cbb351d498f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="39226756-9d10-4a15-b754-b474d41866b8" name="unsigned char * buffer" direction="In" isUnique="false">
+                  <elementDefinition Id="ba0a59d9-8676-40d5-a545-72042b5dd2fa" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5adc1018-186a-4a41-82dc-7ff22ecee619" name="DWORD bufferSize" direction="In" isUnique="false">
+                  <elementDefinition Id="55da0f39-ecbc-49e6-9cec-f1996d96767e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a9df7f34-edb4-47fc-ae57-0fd465b65cb9" direction="Return" isUnique="false">
+                  <elementDefinition Id="1a968ef7-bf18-4a64-8ce2-77b21de089c5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="f2ac2af2-3de4-45c1-b50e-b1aeaf1c2bed" name="wait" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="20fa41ff-3489-4060-9b27-cbe08bb9c1ab" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3209142d-7760-4ccd-8bdb-16ddaa671be9" direction="Return" isUnique="false">
+                  <elementDefinition Id="aecc3eda-41c3-4451-9358-670fb3bd6e0c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20935c76-48fe-40ea-b6e0-c542855b6bae" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="9b530d86-f690-48ea-97ca-ea42fb3bf3f2" name="isEmpty" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ab53cac6-744a-41cf-b8de-6bccd8f0ddc0" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a9affa8e-95e6-417f-90f4-a0e7c3623cbf" direction="Return" isUnique="false">
+                  <elementDefinition Id="a442af3a-d3a6-435e-b56e-b10a090c7287" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3633ff6c-6338-4cc9-bfc5-053153e4bf02" LastKnownName="bool" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="086b7e96-1a60-4f07-8539-161eedfdd8f2" name="HANDLE" isAbstract="false" isLeaf="false" cachedFullName="HANDLE">
+        <elementDefinition Id="8aaef5f1-d8d5-44ac-aa79-a493676a6bb3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="ed36b80b-8a3f-418e-a7e5-f2526365549d" name="LPTSTR" isAbstract="false" isLeaf="false" cachedFullName="LPTSTR">
+        <elementDefinition Id="238a9986-68b1-4fdf-ad0d-9d7042ddf97a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="71d910a3-94eb-4446-b9e0-4a4a0f3ef3e8" name="std::shared_ptr&lt;SharedMemoryManager&gt;" isAbstract="false" isLeaf="false" cachedFullName="std::shared_ptr&lt;SharedMemoryManager&gt;">
+        <elementDefinition Id="2d0c7dc1-805b-4b51-a596-5ffe0dbcbb85" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="ca1a49c2-be1d-4c58-85d7-920f79b5faf5" name="char *" isAbstract="false" isLeaf="false" cachedFullName="char *">
+        <elementDefinition Id="0441131a-cbb3-4600-bb18-ab878fba8935" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="01064bf3-0d26-4a55-b2f3-e1743c23bc4d" name="ScreenUtils" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4d6d96bc-b013-430e-8900-b7e886d2dae7" />
+        <ownedOperationsInternal>
+          <operation Id="abedfcd0-cff2-46d0-a2c7-0fb7e1740156" name="Bytes2Bitmap" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="586fc415-e35e-4637-a40c-6b719cda26d7" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0de1dcbe-82f1-410a-9081-6275da576afb" name="char arrData[]" direction="In" isUnique="false">
+                  <elementDefinition Id="2b640642-40c9-48bd-b157-3faa58af498c" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="90a5893e-af97-4478-910a-34c4ffb53f1f" name="int iLen" direction="In" isUnique="false">
+                  <elementDefinition Id="7543164b-8153-40d3-9c15-116e872514a6" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="07c8c46d-83eb-4193-81d0-c878f0617fb6" direction="Return" isUnique="false">
+                  <elementDefinition Id="dc8cad97-8885-43d4-baba-f706ce8058de" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5c969d59-b1ed-45b7-a6a2-09469b3c9309" LastKnownName="HBITMAP" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="9a8b44da-7734-4146-aa6d-191ba44511eb" name="hbitmapToJPEG" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="60b5a0cb-bf53-4d06-8048-7c7703c54db9" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bf7cf163-70f2-48a1-b652-d7c7bc43d115" name="HBITMAP hBmpSrc" direction="In" isUnique="false">
+                  <elementDefinition Id="7e50a841-8cd9-499f-80e4-013043ee3942" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="396b5d2e-e170-4ac4-bf50-ebaa0adb00b4" name="int &amp; size_" direction="In" isUnique="false">
+                  <elementDefinition Id="167a9737-c6cc-4469-a86f-a6a37cffab61" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e472bd9e-442f-4dae-aca1-df14286e1c85" direction="Return" isUnique="false">
+                  <elementDefinition Id="676eec36-ff4d-4de8-b041-ca6e46232006" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c92c9ef0-6e58-47f3-8f7f-e587f3dc16d9" LastKnownName="BYTE *" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="1625fa56-4e79-4ab2-b36a-f20c9ae269c5" name="Bitmap2Bytes" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="5d50d79b-1bfc-4b30-9f00-120d711f81f8" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0c44ad4c-4f62-4410-b5f0-c7d541d30c4c" name="HBITMAP hBitmap" direction="In" isUnique="false">
+                  <elementDefinition Id="ff6d936d-6e8b-44e9-b483-dd773d0860a5" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c19e4187-d48e-4d33-92bc-bbc18a79abbe" name="int&amp; len" direction="In" isUnique="false">
+                  <elementDefinition Id="6c5b0ef6-01a9-490a-a15d-a410a1d711c1" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="27bf8e77-82ac-4518-818b-1956c90949c5" direction="Return" isUnique="false">
+                  <elementDefinition Id="3392deea-48ad-4bd0-a722-6b75e9f3c4f8" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="ca1a49c2-be1d-4c58-85d7-920f79b5faf5" LastKnownName="char *" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="cbb50076-3904-4a80-ad6b-138a964e6b31" name="myGetDibBits24" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3a5bb13b-8667-407a-9207-1b45d3f0460e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f52a14e8-21b8-48b1-83cd-38a7bb0d0199" name="int &amp; size_" direction="In" isUnique="false">
+                  <elementDefinition Id="d1460532-89f7-42a9-9d84-d157dddae446" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e7eb09fe-546f-4a21-8893-a10c32d93d3a" direction="Return" isUnique="false">
+                  <elementDefinition Id="9cbb7c36-4301-4c54-9f5f-929c898673c5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c92c9ef0-6e58-47f3-8f7f-e587f3dc16d9" LastKnownName="BYTE *" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="5c969d59-b1ed-45b7-a6a2-09469b3c9309" name="HBITMAP" isAbstract="false" isLeaf="false" cachedFullName="HBITMAP">
+        <elementDefinition Id="8e31947a-0aaa-44d5-9e8f-ff1e0c60060a" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="53f11f96-7335-49de-b5d7-d954e066b6a1" name="FinalTask">
+    <elementDefinition Id="505df9c7-d537-4f31-8f7b-7b9dde35bb44" />
+    <profileInstances>
+      <packageHasProfileInstances Id="92aefe55-7ceb-4736-8ea7-ea241d491f76">
+        <profileInstance Id="1c0c2ebf-5241-42bc-a2db-5a8bc95463d7" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="b7270426-4e7a-4e8d-a4c9-c502ba8977ee">
+        <profileInstance Id="d91502a4-9886-4d98-bf79-ad09f4f00601" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>

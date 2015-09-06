@@ -8,9 +8,11 @@
 #include <boost/asio.hpp>
 #include <boost/shared_ptr.hpp>
 #include <thread>
-#include "SharedMemoryManager.h"
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
+
+#include "SharedMemoryManager.h"
+#include "ScreenUtils.h"
 
 #define CONNECTION_FAILED 1
 #define CONNECTION_CORRUPTED 2

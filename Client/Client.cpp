@@ -56,68 +56,6 @@ size_t Client::ifReadImage(const boost::system::error_code & error, size_t bytes
 	return found ? 0 : 1;
 }
 
-HBITMAP Bytes2Bitmap(char arrData[], int iLen)
-{
-	PBITMAPFILEHEADER    bmfHeader;
-	PBITMAPINFO    pbi;
-	HDC            hDC;
-	HBITMAP        hBmpRet;
-	int            iRet;
-	char        *lpbitmap;
-	int            iSizeOfBmInfo;
-	const int    iSizeOfBmfHeader = sizeof(BITMAPFILEHEADER);
- 
-	bmfHeader = (PBITMAPFILEHEADER) arrData;
-	arrData += iSizeOfBmfHeader;
- 
-	iSizeOfBmInfo = bmfHeader->bfOffBits - iSizeOfBmfHeader;
-	pbi = (PBITMAPINFO) arrData;
-	arrData += iSizeOfBmInfo;
- 
-	hDC = GetDC(nullptr);
-	hBmpRet = CreateCompatibleBitmap(hDC,
-	pbi->bmiHeader.biWidth, pbi->bmiHeader.biHeight);
- 
-	iRet = SetDIBits(hDC, hBmpRet, 0,
-		pbi->bmiHeader.biHeight,
-		arrData,
-		pbi, DIB_RGB_COLORS);
- 
-	::ReleaseDC(nullptr, hDC);
- 
-	return hBmpRet;
-}
-
-int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
-{
-	UINT  num = 0;
-	UINT  size = 0;
-	
-	Gdiplus::ImageCodecInfo * pImageCodecInfo = nullptr;
-
-	Gdiplus::GetImageEncodersSize(&num, &size);
-	if(size == 0)
-		return -1;
-
-	pImageCodecInfo = (Gdiplus::ImageCodecInfo *)(malloc(size));
-	if(pImageCodecInfo == nullptr)
-		return -1;
-
-	GetImageEncoders(num, size, pImageCodecInfo);
-
-	for(UINT j = 0; j < num; ++j)
-	{
-		if( wcscmp(pImageCodecInfo[j].MimeType, format) == 0 )
-		{
-			*pClsid = pImageCodecInfo[j].Clsid;
-			free(pImageCodecInfo);
-			return j;
-		}
-	}
-	free(pImageCodecInfo);
-	return -1;
-}
-
 void Client::read()
 {
 	readBytes = 0;
