@@ -19,7 +19,7 @@
 class Helper
 {
 private:
-	SharedMemoryManager * manager;
+	std::shared_ptr<SharedMemoryManager> m_manager;
 	void threadProgress();
 public:
 	Helper();

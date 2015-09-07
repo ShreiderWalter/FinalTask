@@ -72,8 +72,6 @@ void SharedMemoryManager::close()
 void SharedMemoryManager::write(const char * tmp)
 {
 	WaitForSingleObject(m_mutex, INFINITE);
-	UnmapViewOfFile(m_buffer);
-	m_buffer = (LPTSTR) MapViewOfFile(m_sharedMemory, FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, BUFFER_SIZE);
 	CopyMemory((PVOID)m_buffer, tmp,  (_tcslen(tmp)) * sizeof(TCHAR));
 	ReleaseMutex(m_mutex);
 }

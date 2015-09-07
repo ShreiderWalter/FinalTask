@@ -2,7 +2,8 @@
 
 Helper::Helper()
 {
-	manager = SharedMemoryManager::create(MAPPING_OBJECT_NAME).get();
+	m_manager = std::shared_ptr<SharedMemoryManager>
+		(SharedMemoryManager::create(MAPPING_OBJECT_NAME).get());
 }
 
 Helper::~Helper()
@@ -19,10 +20,10 @@ void Helper::threadProgress()
 		std::string msg = std::to_string(bufferSize);
 		std::cout << "Size : " << msg << "\n";
 
-		manager->wait();
-		manager->write(msg.c_str());
-		manager->wait();
-		manager->write(buffer, bufferSize);
+		m_manager->wait();
+		m_manager->write(msg.c_str());
+		m_manager->wait();
+		m_manager->write(buffer, bufferSize);
 		delete buffer;
 	}
 }

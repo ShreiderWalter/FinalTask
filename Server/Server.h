@@ -23,12 +23,11 @@ private:
 
 	void bind();
 	void accept(ServerSession * , const boost::system::error_code &);
-	void setImage();
 	boost::asio::io_service & m_io_service;
 	boost::asio::ip::tcp::acceptor m_acceptor;
 	int m_size;
 	unsigned char * m_buffer;
-	SharedMemoryManager * m_manager;
+	std::shared_ptr<SharedMemoryManager> m_manager;
 
 
 public:

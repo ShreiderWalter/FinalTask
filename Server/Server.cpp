@@ -116,13 +116,14 @@ void Server::ServerSession::write(const std::string & msg)
 Server::Server(boost::asio::io_service & io_service, int port) : 
 	m_io_service(io_service), m_acceptor(io_service, tcp::endpoint(tcp::v4(), port))
 {
-	m_manager = SharedMemoryManager::connect(MAPPING_OBJECT_NAME).get();
+	m_manager = std::shared_ptr<SharedMemoryManager>
+		(SharedMemoryManager::connect(MAPPING_OBJECT_NAME).get());
 	bind();
 }
 
 SharedMemoryManager * Server::getMemoryManager() const
 {
-	return m_manager;
+	return m_manager.get();
 }
 
 void Server::bind()
