@@ -1,52 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <?define ProductName="FinalTaskInstaller"?>
-	<?define ProductVersion="1.0.0.0"?>
-  <?define ProductCode="*"?>
-  <?define UpgradeCode="2e9dbd42-fd2a-4715-8cc5-b8a24df0a815"?>
-  <?define Manufacturer="Slava"?>
-  <Product Id="$(var.ProductCode)" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+ <?define ProductName="FinalTask" ?>
+ <?define ProductVersion="1.0.0.0" ?>
+ <?define ProductCode="b7bc7c6f-9a4e-4973-be84-eca8e3427c97"?>
+ <?define UpgradeCode="06a81104-1e30-463d-87e1-e8a79b4c682a"?>
+ <?define Manufacturer="Slava"?>
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+ <Product Id="$(var.ProductCode)" Name="$(var.ProductName)" Language="1033" 
+          Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" 
+          UpgradeCode="$(var.UpgradeCode)">
+    <Package InstallerVersion="200" Compressed="yes" />
 
-		<Feature Id="ProductFeature" Title="$(var.ProductName)" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-  
-    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION"></Property>
-    <!--<WixVariable Id="WixUILicenseRtf" Overridable="yes" Value="Licence.rtf"/>-->
-    <UIRef Id="WixUI_InstallDir"/>
-	</Product>
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="FinalTaskInstaller" />
-			</Directory>
-		</Directory>
-    
-    <!--<Directory Id="ProgramMenuFolder">
-      <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)">
-       <Component Id="ApplicationShortcutFinalTask" Guid="4CEBD68F-E933-47f9-B02C-A4FC69FDB551">
-        <Shortcut Id="ShortcutFinalTask"
-             Name="Calc"
-             Description="$(var.ProductName)"
-             Target="[INSTALLLOCATION]Calc.exe"
-             WorkingDirectory="INSTALLLOCATION"/>
-        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
-        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-       </Component>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
+          <Component Id="ProductComponent" Guid="*">
+            <File Id='Final' DiskId='1' Source='Client.exe'/>
+          </Component>
+        </Directory>
       </Directory>
-    </Directory>-->
-	</Fragment>
+            
+     <Directory Id="DesktopFolder" Name="Desktop">
+       <Component Id="ApplicationShortcutFinalDesk" Guid="*">
+        <Shortcut Id="ShortcutFinalTaskDesk"
+             Name="FinalTask"
+             Description="$(var.ProductName)"
+             Target="[INSTALLLOCATION]Client.exe"
+             WorkingDirectory="INSTALLLOCATION"/>
+        <RemoveFolder Id="ApplicationDesktop" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" 
+                       Name="DesktopSC" Type="integer" Value="1" KeyPath="yes"/>
+       </Component>
+     </Directory>
+    
+     <Directory Id="Server" Name="Server">
+       <Component Id="Server.service" Guid="73f70b59-69a9-4109-a72a-481d1aac440e">
+         <File Id="Server.exe" Name="Server.exe" Source="Server.exe"/>
+         <ServiceInstall Id="ServiceInstaller" Type="ownProcess" Vital="yes" 
+                         Name="Slava::Server" DisplayName="Slava::Server"
+                         Start="auto" Account="LocalSystem" ErrorControl="ignore"
+                         Interactive="no"/>
+         <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall"
+                         Name="Slava::Server" Wait="yes" />
+       </Component>
+     </Directory>
+    </Directory>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			 <Component Id="ProductComponent"> 
-          <File Id="Server" DiskId="1" Source="C:\WINDOWS\system32\calc.exe" />
-      </Component> 
-		</ComponentGroup>
-	</Fragment>
+    <Feature Id="ProductFeature" Title="FinalTask" Level="1">
+      <ComponentRef Id="ProductComponent" />
+      <ComponentRef Id="ApplicationShortcutFinalDesk" />
+      <ComponentRef Id="Server.service" />
+    </Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" ></Property>
+    <UIRef Id="WixUI_InstallDir"/>
+  
+  </Product>
 </Wix>
